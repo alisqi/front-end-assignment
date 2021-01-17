@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Preact calendar</title>
+	<style>
+		.code {
+			font-family: monospace;
+		}
+	  
+		.calendar {
+			width: 300px;
+			text-align: center;
+		}
+		
+		.calendar-header {
+			display: flex;
+			font-size: 1.1em;
+		}
+		.calendar-header > .nav {
+			cursor: pointer;
+		}
+		.calendar-header > .label {
+			flex: auto;
+		}
+		
+		.calendar-weekdays {
+			border-bottom: 2px solid #BBBDBF;
+		}
+		
+		.calendar-weekdays > span,
+		.calendar-dates > .date {
+			display: inline-block;
+			width: 14.2857%;	/* 100% / 7 */
+			margin-bottom: 2px;
+			padding: 0.3em 0;
+		}
+		
+		.calendar-dates > .date:not(.date-empty) {
+			cursor: pointer;
+		}
+		.calendar-dates > .date-today {
+			background-color: rgb(225, 225, 225);
+		}
+		.calendar-dates > .date-selected {
+			margin-bottom: 0;
+			border-bottom: 2px solid #0077EF;
+		}
+		.calendar-dates > .date-selected,
+		.calendar-dates > .date:not(.date-empty):hover {
+			background: linear-gradient(transparent, rgba(0, 119, 239, 0.2));
+		}
+	</style>
+	<script type="module">
+		import renderCalendar from './calendar.js';
+		
+		renderCalendar(
+			document.getElementById('calendar-container'),
+			(date) => document.querySelector('input[name="date"]').value = date.toDateString()
+		);
+	</script>
+</head>
+<body>
+
+	<h1>Assignment</h1>
+	<p>Implement <span class="code">calendar.js</span> (see <span class="code">&lthead&gt;</span>) such that:</p>
+	<ul>
+		<li>It renders a calendar in <span class="code">.calendar-container</span> (see example markup)</li>
+		<li>When a date cell is clicked, the callback receives it as a <span class="code">Date</span> object</li>
+		<li>Preferably, use <a href="https://preactjs.com/guide/v10/getting-started/#no-build-tools-route">preact.js</a> with
+			<a href="https://github.com/developit/htm">htm</a> (the no-build-tools route). (Preact.js documentation is very brief in many spots. Fortunately, React's official documentation fills in the gaps, since preact works <em>almost</em> the same.)</li>
+		<li>Preferably, use <a href="https://preactjs.com/guide/v10/components#functional-components">functional components</a>
+			with <a href="https://preactjs.com/guide/v10/hooks">hooks</a> (instead of class components)
+		</li>
+		<li>You <em>may</em> use whatever library you're most comfortable with, but you'll impress me way more by learning something new.</li>
+		<li>If you'd can't wrap your head around Preact or functional components + hooks, feel free to use any other library.</li>
+		<li>You <em>may</em> use Babel, webpack, Typescript or other tools, but you can absolutely implement this without any of them</li>
+		<li>Bonus points if you set up Babel to <a href="https://github.com/developit/htm/tree/master/packages/babel-plugin-htm">compile away html</a> (in any way you like)</li>
+	</ul>
+	<p>CSS is already present. Plus there's enough markup to strongly hint how to use it.</p>
+
+	<h1>Pick a date!</h1>
+	<input type="hidden" name="date">
+	
+	<div id="calendar-container">
+		<div class="calendar">
+			<div class="calendar-header">
+				<span class="nav">prev</span>
+				<span class="label">January 2021</span>
+				<span class="nav">next</span>
+			</div>
+			<div class="calendar-weekdays">
+				<!-- We must prevent whitespace between elements! -->
+				<span class="label">Mo</span
+				><span class="label">Tu</span
+				><span class="label">We</span
+				><span class="label">Th</span
+				><span class="label">Fr</span
+				><span class="label">Sa</span
+				><span class="label">Su</span>
+			</div>
+			<div class="calendar-dates">
+				<!-- We must prevent whitespace between elements! -->
+				<span class="date date-empty date-disabled" style="width: 57.14%;"></span
+				><span class="date">1</span
+				><span class="date">2</span
+				><span class="date">3</span
+				><span class="date date-selected">4</span
+				><span class="date">5</span
+				><span class="date">6</span
+				><span class="date">7</span
+				><span class="date">8</span
+				><span class="date">9</span
+				><span class="date">10</span>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
